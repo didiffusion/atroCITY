@@ -2,8 +2,11 @@
 import streamlit as st
 from streamlit_chat import message
 
-from langchain.chains import ConversationChain
 from langchain.llms import AI21
+
+from langchain.chains import ConversationChain
+from langchain.memory import ConversationBufferMemory
+from langchain.prompts import PromptTemplate
 
 import os
 
@@ -16,12 +19,21 @@ st.header("LangChain Demo")
 # Ask the user to enter their  API key
 AI21_API_KEY = st.sidebar.text_input("API-KEY", type="password")
 
+template = """The following is an tense conversation between a really evil urban planner talking and a citizen concerned about the future of their city and communities. The urban planner does not want to talk about any other thing that urban planning and only provided bad advice that will end up destroying the city. He's somewhat mean and really wants to see the city be destroyed because of bad decisions.
+
+Current conversation:
+{history}
+Citizen: {input}
+Urban planner:"""
+prompt_template = PromptTemplate(input_variables=["history", "input"], template=template)
 
 def load_chain():
     """Logic for loading the chain you want to use should go here."""
-    llm = AI21(model="j2-jumbo-instruct")
-    #llm = OpenAI(temperature=0)
-    chain = ConversationChain(llm=llm)
+    llm = AI21(model="j2-grande-instruct", stop=['Citizen:'])
+    #llm = AI21(model="j2-jumbo-instruct") TODO: Maybe play with temp?
+    chain = ConversationChain(llm=llm,verbose=True, prompt=prompt_template, memory=ConversationBufferMemory(ai_prefix="Urban planner", human_prefix="Citizen"))
+    
+    
     return chain
 
 if AI21_API_KEY:
@@ -42,7 +54,7 @@ if "past" not in st.session_state:
 
 
 def get_text():
-    input_text = st.text_input("You: ", "Hello, how are you?", key="input")
+    input_text = st.text_input("Citizen: ", "Hello, how are you?", key="input")
     return input_text
 
 
