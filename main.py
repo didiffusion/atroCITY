@@ -31,7 +31,7 @@ def load_chain():
     """Logic for loading the chain you want to use should go here."""
     llm = AI21(model="j2-grande-instruct", stop=['Citizen:'])
     #llm = AI21(model="j2-jumbo-instruct") TODO: Maybe play with temp?
-    chain = ConversationChain(llm=llm,verbose=True, prompt=prompt_template, memory=ConversationBufferMemory(ai_prefix="Urban planner", human_prefix="Citizen"))
+    chain = ConversationChain(llm=llm,verbose=False, prompt=prompt_template, memory=ConversationBufferMemory(ai_prefix="Urban planner", human_prefix="Citizen"))
     
     
     return chain
