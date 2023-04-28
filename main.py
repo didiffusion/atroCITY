@@ -30,7 +30,6 @@ if AI21_API_KEY:
 else:
     st.sidebar.warning('API key required to try this app.The API key is not stored in any form.')
 
-chain = None
 
 #chain = load_chain()
 
@@ -49,7 +48,7 @@ def get_text():
 
 user_input = get_text()
 
-if user_input and chain:
+if user_input and AI21_API_KEY:
     output = chain.run(input=user_input)
 
     st.session_state.past.append(user_input)
