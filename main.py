@@ -13,8 +13,8 @@ import os
 
 
 # From here down is all the StreamLit UI.
-st.set_page_config(page_title="LangChain Demo", page_icon=":robot:")
-st.header("LangChain Demo")
+st.set_page_config(page_title="Urban planner interview gone wrong", page_icon="::")
+st.header("Urban planner interview gone wrong")
 
 # Ask the user to enter their  API key
 AI21_API_KEY = st.sidebar.text_input("API-KEY", type="password")
