@@ -6,7 +6,15 @@ from langchain.chains import ConversationChain
 from langchain.llms import AI21
 
 import os
-os.environ["AI21_API_KEY"] = ""
+
+
+
+# From here down is all the StreamLit UI.
+st.set_page_config(page_title="LangChain Demo", page_icon=":robot:")
+st.header("LangChain Demo")
+
+# Ask the user to enter their  API key
+AI21_API_KEY = st.sidebar.text_input("API-KEY", type="password")
 
 
 def load_chain():
@@ -16,11 +24,16 @@ def load_chain():
     chain = ConversationChain(llm=llm)
     return chain
 
-chain = load_chain()
+if AI21_API_KEY:
+    os.environ["AI21_API_KEY"] = AI21_API_KEY
+    chain = load_chain()
+else:
+    st.sidebar.warning('API key required to try this app.The API key is not stored in any form.')
 
-# From here down is all the StreamLit UI.
-st.set_page_config(page_title="LangChain Demo", page_icon=":robot:")
-st.header("LangChain Demo")
+chain = None
+
+#chain = load_chain()
+
 
 if "generated" not in st.session_state:
     st.session_state["generated"] = []
@@ -36,7 +49,7 @@ def get_text():
 
 user_input = get_text()
 
-if user_input:
+if user_input and chain:
     output = chain.run(input=user_input)
 
     st.session_state.past.append(user_input)

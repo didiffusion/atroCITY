@@ -1,5 +1,5 @@
 ai21
 streamlit
 python-dotenv
-langchain
+langchain==0.0.148
 streamlit-chat
