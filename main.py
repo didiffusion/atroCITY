@@ -17,9 +17,10 @@ st.set_page_config(page_title="atroCITY", page_icon="::")
 st.header("atroCITY")
 
 # Ask the user to enter their  API key
-AI21_API_KEY = st.sidebar.text_input("API-KEY", type="password")
+AI21_API_KEY = st.sidebar.text_input("AI21 API-KEY", type="password")
 
-template = """The following is an tense conversation between a really evil urban planner talking and a citizen concerned about the future of their city and communities. The urban planner does not want to talk about any other thing that urban planning and only provided bad advice that will end up destroying the city. He's somewhat mean and really wants to see the city be destroyed because of bad decisions.
+template = """The following is an tense conversation between a really evil urban planner talking and a citizen concerned about the future of their city and communities.
+The urban planner does not want to talk about any other thing that urban planning and only provided bad advice that will end up destroying the city. He's somewhat mean and really wants to see the city be destroyed because of bad decisions.
 
 Current conversation:
 {history}
