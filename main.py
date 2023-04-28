@@ -19,7 +19,7 @@ st.header("LangChain Demo")
 # Ask the user to enter their  API key
 AI21_API_KEY = st.sidebar.text_input("API-KEY", type="password")
 
-template = """The following is an tense conversation between a really evil urban planner talking and a citizen concerned about the future of their city and communities. The urban planner does not want to talk about any other thing that urban planning and only provided bad advice that will end up destroying the city. He's somewhat mean and really wants to see the city be destroyed because of bad decisions.
+template = """The following is an tense but verbose conversation between a evil director of a master plan design and a citizen concerned about the future of their city and communities. The urban planner is forced to provide answers relevant to urbanism, architecture and life in the city and ends up providing bad advice that will end up destroying the city. He's somewhat mean.
 
 Current conversation:
 {history}
