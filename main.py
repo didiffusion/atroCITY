@@ -44,7 +44,11 @@ else:
 
 
 #chain = load_chain()
+from PIL import Image
 
+image = Image.open('images/grey_planner.png')
+
+st.image(image, caption='XX century urban planner')
 
 if "generated" not in st.session_state:
     st.session_state["generated"] = []
@@ -69,5 +73,5 @@ if user_input and AI21_API_KEY:
 if st.session_state["generated"]:
 
     for i in range(len(st.session_state["generated"]) - 1, -1, -1):
-        message(st.session_state["generated"][i], key=str(i))
+        message(st.session_state["generated"][i], key=str(i), avatar_style="adventurer-neutral", seed="Boo")
         message(st.session_state["past"][i], is_user=True, key=str(i) + "_user")
